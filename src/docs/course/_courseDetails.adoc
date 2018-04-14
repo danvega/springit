@@ -48,6 +48,17 @@ One of the big thing I heard from my students in my first course is that they wa
     ** Profiles
     ** Debugging & Logging
     ** Actuator
+* Spring MVC: Model
+    ** Spring Data JPA Introduction
+    ** Link Entity & Repository
+    ** Project Lombok Refactor
+    ** Comment & Vote Entities
+    ** Auditing Aware
+* Database Layer
+    ** Properties
+    ** H2 in memory database setup
+    ** Creating data using SQL
+    ** Creating data using Java
 
 === Course Project
 
