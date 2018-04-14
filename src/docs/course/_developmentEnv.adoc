@@ -1,0 +1,14 @@
+=== Java
+
+==== SDKMan
+
+=== Build Tools
+
+==== Maven
+==== Gradle
+
+=== IDE & Text Editors
+
+==== IntelliJ
+==== Spring Tool Suite (Eclipse)
+==== Visual Studio Code

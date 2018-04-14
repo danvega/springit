@@ -1,0 +1,344 @@
+:imagesdir: images/
+
+image::pexels-photo-273238-2.jpeg[]
+
+==== Spring Boot History
+Before we dive into what’s new I want to take this chance to take a quick look at the history of Spring Boot. In a blog post published in August 2013, Phil Webb announced the first milestone release of a new project called Spring Boot.
+____
+Spring Boot aims to make it easy to create Spring-powered, production-grade applications and services with minimum fuss. It takes an opinionated view of the Spring platform so that new and existing users can quickly get to the bits they need. You can use it to create stand-alone Java applications that can be started using ‘java -jar’ or more traditional WAR deployments. 
+____
+
+
+About 9 months later in April 2014 Spring Boot 1.0 was released. Since then there have been numerous minor releases that have brought us some really great features. 
+
+* Spring Boot 1.1 (June 2014) 
+    ** spring-boot-starter-test
+    ** Metrics & Health Endpoints
+    ** Elastic Search, Apache Solr, Spring Social & Spring Integration Auto-configuration 
+    ** Additional Templating support (Adding Freemaker, Groov, and Velocity)
+* Spring Boot 1.2 (March 2015) 
+    ** Servlet 3.1, Tomcat 8 & Jetty 9
+    ** Spring 4.1
+    ** @SpringBootApplication Annotation
+    ** Email Support
+* Spring Boot 1.3 (December 2016)
+    ** Upgrade to Spring Framework 4.2
+    ** Upgrade to Spring Security 4.0
+    ** Developer Tools
+    ** Caching Auto-configuration 
+    ** Fully executable JARs and service support
+* Spring Boot 1.4 (January 2017)
+    ** Spring 4.3
+    ** Hibernate 5
+    ** Testing Improvements
+    ** Integration Starter
+    ** Couchbase and Neo4J Support
+* Spring Boot 1.5 (February 2017)
+    ** Loggers endpoint
+    ** Apache Kafka support
+    ** Cloud Foundry actuator extensions
+    ** LDAP support
+    ** Testing updates
+
+==== What's new in Spring 
+What's new in Spring Boot 2? If we are going to talk about the biggest feature we need to start with the upgrade to Spring Framework 5. While Spring Framework 5 has been out since September 2017, most developers (like me) have been waiting for the release of Spring Boot 2. Spring Framework 5 introduces a long list of new features but I just want to touch on a few of the major ones here.
+
+===== What’s new in Spring Framework 5
+image::mark-solarski-209233-unsplash.jpg[]
+
+*Java 8+ Baseline*
+
+If you wish to build Spring Framework applications going forward you must be on a minimum of Java 8. Your first thought might be this is a great change for all of us but in fact its an even bigger one for the Spring team. This gave them a chance to make some major changes to update the code base to all the new features in Java 8 like Lambdas and streams. This not only ads readability throughout the code but also offers some performance improvements to the core of the framework. 
+
+*Java 9 Support*
+
+If you want to use Java 9 you will need to update to Spring Framework 5 and therefore need to update to Spring Boot 2. I know many of us might not be on the latest and greatest version of Java in production but this is a great chance for you to play around with all the cool new toys. This works pretty seamlessly out of the box using the standard classpath but I have read a few people having issues moving to Java 9 modules. 
+
+*Spring MVC*
+
+While Spring MVC isn't the main character in this story there were some nice upgrades. I won't go through them all here so head over to documentation for Spring Framework 5.
+
+*Spring Webflux*
+
+The reactive stack is our main character in the story of Spring Framework 5. This is a different way of thinking but fortunately for us, we don't have to learn a whole new way of writing applications. Spring WebFlux is a fully asynchronous and non-blocking web framework built from the ground up allowing us to handle a massive number of concurrent connections. While this is a complete paradigm shift it is really easy to get started. 
+
+image::reactive_stack.png[align="center"]
+
+*Kotlin Support*
+
+Kotlin support was added to http://start.spring.io but in Spring Framework 5 there is dedicated support for the language. With the dedicated support came some nice features that you can read about here.
+
+*Testing Improvements*
+
+The biggest change in the testing landscape is the complete support for JUnit 5's Jupiter programming and extension model. I will mention this again later but when you fire up a new Spring Boot 2 application you are still using JUnit 4 by default however it is a simple change if you want to start using JUnit 5. 
+
+===== What's new in Spring Boot 2
+image::jon-tyson-520864d-unsplash.jpg[]
+
+*Third-party Library Upgrades*
+
+With any new release of Spring Boot, the Spring team has an opportunity to update various dependencies. 
+
+* Thymeleaf 3
+* Jetty 9.4
+* Tomcat 8.5
+* Hibernate 5.2
+* Flyway 5
+* Gradle 4
+
+*Reactive Spring Data & Spring Security *
+
+With the move to Spring WebFlux, Spring Data also provides support for reactive applications. Currently, Cassandra, MongoDB, Couchbase and Redis all have reactive API support. Spring Boot includes starter-POMs for all of these which should make getting started really easy. 
+
+We also gain the ability to use Spring Security 5.0 in our reactive applications. When Spring Security is on the classpath auto-configuration is provided for WebFlux applications.
+
+*Actuator*
+
+Spring Boot Actuator is nothing new but it has been rewritten from the ground up. If you're not familiar with the Actuator project it automatically exposes endpoints to get information about that status of your application. The Actuator in Spring Boot 1.x was written against the servlet API and with the new reactive stack, the Spring team needed a solution that would work with both. Along with that, there were many changes to Actuator: 
+
+* Redesign for both servlet & reactive
+* Status & health (all the details) were separated out
+* Simplified Security model
+* Move to micrometer (think SLF4J but for metrics)
+* Improved JSON Structures
+* Simplified process for creating User-Defined Endpoints.
+    ** @Endpoint
+    ** @WebEndpoint
+    ** @JmxEndpoint
+
+image::pexels-photo-241544.jpeg[]
+
+This might be an area that folks have some trouble upgrading because of the security model changes which we will talk about those in a few. By default, all web endpoints are available beneath the path /actuator with URLs of the form /actuator/{id}. The /actuator base path can be configured by using the management.endpoints.web.base-path property.
+
+There is a dedicated detailed document for Spring Boot Actuator Web API Endpoints and this is a great place to start. 
+
+*Gradle Plugin*
+
+I have always been a big fan of Gradle and I am really excited to see that the team took this opportunity to rewrite the Gradle plugin. 
+
+The Spring Boot Gradle Plugin provides Spring Boot support in Gradle, allowing you to package executable jar or war archives, run Spring Boot applications, and use the dependency management provided by spring-boot-dependencies. Spring Boot’s Gradle plugin requires Gradle 4.0 or later.
+
+images::pexels-photo-209728.jpeg[]
+
+*Getting Started*
+
+To get started with the plugin it needs to be applied to your project.
+```
+buildscript {
+	repositories {
+		maven { url 'https://repo.spring.io/libs-milestone' }
+	}
+
+	dependencies {
+		classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.0.0.RC1'
+	}
+}
+
+apply plugin: 'org.springframework.boot'
+```
+
+*Building executable jars and wars*
+
+The bootRepackage task has been replaced with bootJar and bootWar tasks for building executable jars and wars respectively. Both tasks extend their equivalent standard Gradle jar or war task, giving you access to all of the usual configuration options and behavior.
+
+*Dependency management*
+
+Spring Boot’s Gradle plugin no longer automatically applies the dependency management plugin. Instead, Spring Boot’s plugin now reacts to the dependency management plugin being applied by importing the correct version of the spring-boot-dependencies BOM. This gives you more control over how and when dependency management is configured. For most applications applying the dependency management plugin will be sufficient:
+
+```
+apply plugin: 'io.spring.dependency-management'
+```
+
+The Gradle Plugin also has its own documentation and there is some really great information in there. Anyone that wants to get started using Gradle should start by checking out the link below. 
+
+*Simplified Security *
+
+In Spring Boot 2.x, one of the main goals was to simplify security configuration and make adding custom security easy. By default, everything is secured, including static resources and Actuator endpoints. If Spring Security is on the classpath, Spring Boot will add @EnableWebSecurity and rely on Spring Security's content-negoation to decide which authentication mechanism to use. 
+
+Once users decide that they want to add custom security, the default security configuration provided by Spring Boot will back off completely. At this point, users need to explicitly define all the bits they want to secure. This means security configuration is now in one place and avoids any kind of ordering issues with existing WebSecurityConfigurerAdapters.
+
+image::pexels-photo-113726.jpeg[]
+
+Here is an example of a custom security:
+```
+http
+    .authorizeRequests()
+        // 1
+        .requestMatchers(EndpointRequest.to("status", "info"))
+            .permitAll()
+        // 2
+        .requestMatchers(EndpointRequest.toAnyEndpoint())
+            .hasRole("ACTUATOR")
+        // 3
+        .requestMatchers(StaticResourceRequest.toCommonLocations())
+            .permitAll()
+        // 4
+        .antMatchers("/**")
+            .hasRole("USER")
+    .and()
+  ... // additional configuration
+```
+
+. /status and /info endpoints do not require authentication.
+. All other actuator endpoints are protected by the ACTUATOR role.
+. Common static resource locations are open to all.
+. All other application endpoints are protected by the USER role.
+
+*Actuator Security *
+
+With the actuator endpoints locked down, you will need to include or exclude the endpoints you want to see. These are the properties that now control that and have changed since 1.x 
+
+```
+# ENDPOINTS WEB CONFIGURATION (WebEndpointProperties)
+management.endpoints.web.exposure.include=info,health # Endpoint IDs that should be included or '*' for all.
+management.endpoints.web.exposure.exclude= # Endpoint IDs that should be excluded.
+management.endpoints.web.base-path=/actuator # Base path for Web endpoints. Relative to server.servlet.context-path or management.server.servlet.context-path if management.server.port is configured.
+management.endpoints.web.path-mapping= # Mapping between endpoint IDs and the path that should expose them.
+If you're ever unsure what properties to use bookmark the common application properties documentation. 
+```
+
+*HTTP/2 Support*
+
+It's hard to believe but the HTTP 1.1 specification was released back in 1996. I think this comes without saying but the web is very different today. If you want to enable HTTP/2 in your Spring MVC or WebFlux applications you can use the following property. 
+```
+server.http2.enabled=true
+```
+This support depends on the chosen web server and the application environment since that protocol is not supported out-of-the-box by JDK8. Please https://docs.spring.io/spring-boot/docs/2.0.x/reference/html/howto-embedded-web-servers.html#howto-configure-http2[check out the documentation] for more details. 
+
+image::mac-freelancer-macintosh-macbook-40185.jpeg[]
+
+*Configuration Properties*
+
+In Spring Boot 1.x this notion of relaxed binding was supported and all that meant is there were multiple ways you could create a property name (camel case, underscore, hyphen) and that property would all bind to the same property. 
+
+This still works the same but what they did tighten up was the way that you read variables in your own code. The @Value annotation is a core container feature, and it does not provide the same features as type-safe configuration properties.
+
+image::2018-02-28_07-12-58.png[]
+
+https://docs.spring.io/spring-boot/docs/2.0.x/reference/html/boot-features-external-config.html#boot-features-external-config-relaxed-binding[External Config Relaxed Binding]
+
+*Metrics*
+
+Spring Boot’s own metrics have been replaced by Micrometer. This is being developed by Pivotal and quickly being adopted across projects within Pivotal. 
+
+Spring Boot Actuator provides dependency management and auto-configuration for Micrometer, an application metrics facade that supports numerous monitoring systems, including:
+
+* Atlas
+* Datadog
+* Ganglia
+* Graphite
+* Influx
+* JMX
+* New Relic
+* Prometheus
+* SignalFx
+* Simple (in-memory)
+* StatsD
+* Wavefront
+
+image::micrometer.png[]
+
+To learn more about Micrometer visit https://micrometer.io/
+
+This might cause a little bit of an upgrade pain for those doing a ton of logging of custom metrics.
+
+*Quartz Scheduler*
+
+Spring Boot 2 provides support for the Quartz scheduler that can be used via the spring-boot-starter-quartz dedicated starter. Both in-memory and JDBC stores can be configured.
+```
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-quartz</artifactId>
+</dependency>
+```
+
+image::pexels-photo-768472.jpeg[]
+
+*HikariCP Connection Pool*
+
+The default connection pool has switched from Tomcat to HikariCP. If you used spring.datasource.type to force the use of Hikari in a Tomcat-based application, you can now remove that override. Similarly, if you want to stay with the Tomcat connection pool, simply add the following to your configuration:
+```
+spring.datasource.type=org.apache.tomcat.jdbc.pool.DataSource
+```
+
+*Developer Tools*
+
+By default, each time your application restarts, a report showing the condition evaluation delta is logged. The report shows the changes to your application’s auto-configuration as you make changes such as adding or removing beans and setting configuration properties.
+
+To disable the logging of the report, set the following property:
+```
+spring.devtools.restart.log-condition-evaluation-delta=false
+```
+
+*Kotlin Support*
+
+We talked earlier in this article about the official support for Kotlin. There is also a dedicated portion of the documentation to Kotlin. 
+
+*JUnit 5*
+
+As I said earlier the default for a Spring Boot application is to still use JUnit 4. If you want to switch to JUnit 5 you will need to exclude JUnit 4 from the spring boot starter test and add the required dependencies. You will also need to add the plugin listed below. 
+```
+<dependencies>
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-test</artifactId>
+		<scope>test</scope>
+		<exclusions>
+			<exclusion>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+			</exclusion>
+		</exclusions>
+	</dependency>
+	<dependency>
+		<groupId>org.junit.jupiter</groupId>
+		<artifactId>junit-jupiter-api</artifactId>
+		<scope>test</scope>
+	</dependency>
+	<dependency>
+		<groupId>org.junit.jupiter</groupId>
+		<artifactId>junit-jupiter-engine</artifactId>
+		<scope>test</scope>
+	</dependency>
+</dependencies>
+<build>
+	<plugins>
+		<plugin>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-maven-plugin</artifactId>
+		</plugin>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-surefire-plugin</artifactId>
+			<dependencies>
+				<dependency>
+					<groupId>org.junit.platform</groupId>
+					<artifactId>junit-platform-surefire-provider</artifactId>
+					<version>${junit-platform.version}</version>
+				</dependency>
+			</dependencies>
+		</plugin>
+	</plugins>
+</build>
+```
+
+===== Spring Boot 2 Migration Guide
+
+It probably goes without saying but with any major release like this simply flipping the version number in production isn't your best upgrade path. The first thing I would do is read through the Spring Boot 2.0 Migration Guide. For me I found most of my issues revolved around the simplified security model changes and property changes. The migration guide includes an awesome tip for migrating your property files. 
+____
+With Spring Boot 2.0, many configuration properties were renamed/removed and developers need to update their application.properties/application.yml accordingly. To help you with that, Spring Boot ships a new spring-boot-properties-migrator module. Once added as a dependency to your project, this will not only analyze your application’s environment and print diagnostics at startup, but also temporarily migrate properties at runtime for you. This is a must have during your application migration:
+____
+
+```
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-properties-migrator</artifactId>
+</dependency>
+```
+
+I am not sure what your thoughts are on this but I would certainly start playing with Spring Boot 2 and working on migrating your code over to it but with any major release, I usually wait until the next point release. This isn't just for Spring, I do this with pretty much everything from Apple to Pivotal to Angry Birds! 
+
+image::pexels-photo-860379.jpeg[]
+
+This document was created from http://therealdanvega.com/blog/2018/03/01/what-is-new-spring-boot-2[this blog post].
+You can also watch a video of me talking about https://youtu.be/91n6y-T-PC8[this post here].
