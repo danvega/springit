@@ -1,0 +1,111 @@
+==== JDK 8+ and Java EE 7+ Baseline
+* Entire framework codebase based on Java 8 source code level now.
+    ** Improved readability through inferred generics, lambdas, etc.
+    ** Conditional support for Java 8 features now in straight code.
+* Full compatibility with JDK 9 for development and deployment.
+    ** On classpath as well as module path (with stable automatic module names).
+    ** Framework build and test suite passes on JDK 9 (runs on JDK 8 by default).
+* Java EE 7 API level required in Spring's corresponding features now.
+    ** Servlet 3.1, Bean Validation 1.1, JPA 2.1, JMS 2.0
+    ** Recent servers: e.g. Tomcat 8.5+, Jetty 9.4+, WildFly 10+
+* Compatibility with Java EE 8 API level at runtime.
+    ** Servlet 4.0, Bean Validation 2.0, JPA 2.2, JSON Binding API 1.0
+    ** Tested against Tomcat 9.0, Hibernate Validator 6.0, Apache Johnzon 1.1
+
+==== Removed Packages, Classes and Methods
+* Package beans.factory.access (BeanFactoryLocator mechanism).
+* Package jdbc.support.nativejdbc (NativeJdbcExtractor mechanism).
+* Package mock.staticmock removed from spring-aspects module.
+    ** No support for AnnotationDrivenStaticEntityMockingControl anymore.
+* Packages web.view.tiles2 and orm.hibernate3/hibernate4 dropped.
+    ** Minimum requirement: Tiles 3 and Hibernate 5 now.
+* Dropped support: Portlet, Velocity, JasperReports, XMLBeans, JDO, Guava.
+    ** Recommendation: Stay on Spring Framework 4.3.x for those if needed.
+* Many deprecated classes and methods removed across the codebase.
+    ** A few compromises made for commonly used methods in the ecosystem.
+
+==== General Core Revision
+* JDK 8+ enhancements:
+    ** Efficient method parameter access based on Java 8 reflection enhancements.
+    ** Selective declarations of Java 8 default methods in core Spring interfaces.
+    ** Consistent use of JDK 7 Charset and StandardCharsets enhancements.
+* JDK 9 compatibility:
+    ** Avoiding JDK APIs which are deprecated in JDK 9 wherever possible.
+    ** Consistent instantiation via constructors (with revised exception handling).
+    ** Defensive use of reflection against core JDK classes.
+* Non-null API declaration at the package level:
+    ** Nullable arguments, fields and return values explicitly annotated with @Nullable.
+    ** Primarily for use with IntelliJ IDEA and Kotlin, but also Eclipse and FindBugs.
+    ** Some Spring APIs are not tolerating null values anymore (e.g. in StringUtils).
+* Resource abstraction provides isFile indicator for defensive getFile access.
+    ** Also features NIO-based readableChannel accessor in the Resource interface.
+    ** File system access via NIO.2 streams (no FileInput/OutputStream used anymore).
+* Spring Framework 5.0 comes with its own Commons Logging bridge out of the box:
+    ** spring-jcl instead of standard Commons Logging; still excludable/overridable.
+    ** Autodetecting Log4j 2.x, SLF4J, JUL (java.util.logging) without any extra bridges.
+* spring-core comes with ASM 6.0 (next to CGLIB 3.2.5 and Objenesis 2.6).
+
+==== Core Container
+* Support for any @Nullable annotations as indicators for optional injection points.
+* Functional style on GenericApplicationContext/AnnotationConfigApplicationContext
+    ** Supplier-based bean registration API with bean definition customizer callbacks.
+* Consistent detection of transaction, caching, async annotations on interface methods.
+    ** In case of CGLIB proxies.
+* XML configuration namespaces streamlined towards unversioned schemas.
+    ** Always resolved against latest xsd files; no support for deprecated features.
+    ** Version-specific declarations still supported but validated against latest schema.
+* Support for candidate component index (as alternative to classpath scanning).
+
+==== Spring Web MVC
+* Full Servlet 3.1 signature support in Spring-provided Filter implementations.
+* Support for Servlet 4.0 PushBuilder argument in Spring MVC controller methods.
+* MaxUploadSizeExceededException for Servlet 3.0 multipart parsing on common servers.
+* Unified support for common media types through MediaTypeFactory delegate.
+    ** Superseding use of the Java Activation Framework.
+* Data binding with immutable objects (Kotlin / Lombok / @ConstructorProperties)
+* Support for the JSON Binding API (with Eclipse Yasson or Apache Johnzon as an alternative to Jackson and GSON).
+* Support for Jackson 2.9.
+* Support for Protobuf 3.
+* Support for Reactor 3.1 Flux and Mono as well as RxJava 1.3 and 2.1 as return values from Spring MVC controller methods targeting use of the new reactive WebClient (see below) or Spring Data Reactive repositories in Spring MVC controllers.
+* New ParsingPathMatcher alternative to AntPathMatcher with more efficient parsing and extended syntax.
+* @ExceptionHandler methods allow RedirectAttributes arguments (and therefore flash attributes).
+* Support for ResponseStatusException as a programmatic alternative to @ResponseStatus.
+* Support script engines that do not implement Invocable via direct rendering of the script provided using ScriptEngine#eval(String, Bindings), and also i18n and nested templates in ScriptTemplateView via the new RenderingContext parameter.
+* Spring's FreeMarker macros (spring.ftl) use HTML output formatting now (requiring FreeMarker 2.3.24+).
+
+==== Spring WebFlux
+* New spring-webflux module, an alternative to spring-webmvc built on a reactive foundation -- fully asynchronous and non-blocking, intended for use in an event-loop execution model vs traditional large thread pool with thread-per-request execution model.
+* Reactive infrastructure in spring-core such as Encoder and Decoder for encoding and decoding streams of Objects; DataBuffer abstraction, e.g. for using Java ByteBuffer or Netty ByteBuf; ReactiveAdapterRegistry for transparent support of reactive libraries in controller method signatures.
+* Reactive infrastructure in spring-web including HttpMessageReader and HttpMessageWriter that build on and delegate to Encoder and Decoder; server HttpHandler with adapters to (non-blocking) runtimes such as Servlet 3.1+ containers, Netty, and Undertow; WebFilter, WebHandler and other non-blocking contract alternatives to Servlet API equivalents.
+* @Controller style, annotation-based, programming model, similar to Spring MVC, but supported in WebFlux, running on a reactive stack, e.g. capable of supporting reactive types as controller method arguments, never blocking on I/O, respecting backpressure all the way to the HTTP socket, and running on extra, non-Servlet containers such as Netty and Undertow.
+* New functional programming model ("WebFlux.fn") as an alternative to the @Controller, annotation-based, programming model -- minimal and transparent with an endpoint routing API, running on the same reactive stack and WebFlux infrastructure.
+* New WebClient with a functional and reactive API for HTTP calls, comparable to the RestTemplate but through a fluent API and also excelling in non-blocking and streaming scenarios based on WebFlux infrastructure; in 5.0 the AsyncRestTemplate is deprecated in favor of the WebClient.
+
+==== Kotlin support
+* Null-safe API when using Kotlin 1.1.50 or higher.
+* Support for Kotlin immutable classes with optional parameters and default values.
+* Functional bean definition Kotlin DSL.
+* Functional routing Kotlin DSL for WebFlux.
+* Leveraging Kotlin reified type parameters to avoid specifying explicitly the Class to use for serialization/deserialization in various APIs like RestTemplate or WebFlux APIs.
+* Kotlin null-safety support for @Autowired/@Inject and @RequestParam/@RequestHeader/etc annotations in order to determine if an injection point or handler method parameter is required or not.
+* Kotlin script support in ScriptTemplateView for both Spring MVC and Spring WebFlux.
+* Array-like setters added to Model, ModelMap and Environment.
+* Support for Kotlin autowired constructor with optional parameters.
+* Kotlin reflection is used to determine interface method parameters.
+
+==== Testing Improvements
+* Complete support for JUnit 5's Jupiter programming and extension models in the Spring TestContext Framework.
+    ** SpringExtension: an implementation of multiple extension APIs from JUnit Jupiter that provides full support for the existing feature set of the Spring TestContext Framework. This support is enabled via @ExtendWith(SpringExtension.class).
+    ** @SpringJUnitConfig: a composed annotation that combines @ExtendWith(SpringExtension.class) from JUnit Jupiter with @ContextConfiguration from the Spring TestContext Framework.
+    ** @SpringJUnitWebConfig: a composed annotation that combines @ExtendWith(SpringExtension.class) from JUnit Jupiter with @ContextConfiguration and @WebAppConfiguration from the Spring TestContext Framework.
+    ** @EnabledIf: signals that the annotated test class or test method is enabled if the supplied SpEL expression or property placeholder evaluates to true.
+    ** @DisabledIf: signals that the annotated test class or test method is disabled if the supplied SpEL expression or property placeholder evaluates to true.
+* Support for parallel test execution in the Spring TestContext Framework.
+* New before and after test execution callbacks in the Spring TestContext Framework with support for TestNG, JUnit 5, and JUnit 4 via the SpringRunner (but not via JUnit 4 rules).
+    ** New beforeTestExecution() and afterTestExecution() callbacks in the TestExecutionListener API and TestContextManager.
+* MockHttpServletRequest now has getContentAsByteArray() and getContentAsString() methods for accessing the content (i.e., request body).
+* The print() and log() methods in Spring MVC Test now print the request body if the character encoding has been set in the mock request.
+* The redirectedUrl() and forwardedUrl() methods in Spring MVC Test now support URI templates with variable expansion.
+* XMLUnit support upgraded to 2.3.
+
+This information came straight from the https://github.com/spring-projects/spring-framework/wiki/What's-New-in-Spring-Framework-5.x[Spring Framework Wiki].

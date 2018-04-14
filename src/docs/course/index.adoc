@@ -1,0 +1,43 @@
+= Getting Started with Spring Boot 2.0
+Dan Vega <danvega@gmail.com>
+0.1, April 14, 2018
+:toc: left
+:icons: font
+:quick-uri: http://www.therealdanvega.com/spring-boot-2
+
+This is the documentation for my course titled "Getting Started with Spring Boot 2". This documentation will be a central
+repository for a lot of the course details.
+
+== Course Details
+include::_courseDetails.adoc[]
+
+== Github Repositories
+include::_github.adoc[]
+
+== Development Environment
+include::_developmentEnv.adoc[]
+
+== What's new in Spring
+
+=== Spring Framework 5
+include::_whatsnew_springfw5.adoc[]
+
+=== Spring Boot 2
+include::_whatsnew_springboot2.adoc[]
+
+== Resources
+include::_resources.adoc[]
+
+== Contact Me
+Dan Vega +
+danvega@gmail.com +
+http://www.therealdanvega.com +
+
+*Social Media*
+
+http://www.facebook.com/therealdanvega[Facebook] |
+http://www.twitter.com/therealdanvega[Twitter] |
+http://www.instagram.com/thedanvega[Instagram] |
+http://www.youtube.com/therealdanvega/[YouTube] |
+https://www.linkedin.com/in/danvega/[LinkedIn] |
+https://github.com/cfaddict/[Github]
