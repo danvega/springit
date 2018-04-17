@@ -1,12 +1,29 @@
-=== Main Repo
+=== Repositories
+
+==== Main Repo
 
 This is a reddit clone built using Spring Boot 2. I created this project to show off all the cool features of Spring Boot 2.
 
 https://github.com/cfaddict/springit
 
-=== UI Templates
+==== UI Templates
 
 These are the HTML templates that we are using to build out UI for this course. I wanted to provide the raw templates before we start
 introducing Thymleaf into the equation.
 
 https://github.com/cfaddict/springit-templates
+
+=== Learning
+This is a collection of websites, training videos and resources to help you learn Git & Github. While this course isn't
+specifically about Git or Github I think it is an important skill to learn. If you have some time please consider
+going through some of the links below.
+
+Websites
+
+* https://git-scm.com/[Git]
+* https://github.com[Github]
+
+Resources
+
+* https://www.youtube.com/playlist?list=PL0lo9MOBetEHhfG9vJzVCTiDYcbhAiEqL[Github & Git Foundations]
+* https://help.github.com/articles/git-and-github-learning-resources/[Github Learning Resources]

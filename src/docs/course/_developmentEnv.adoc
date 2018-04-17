@@ -12,3 +12,5 @@
 ==== IntelliJ
 ==== Spring Tool Suite (Eclipse)
 ==== Visual Studio Code
+
+=== Amazon Web Services (AWS)

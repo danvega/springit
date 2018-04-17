@@ -468,15 +468,22 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_spring_boot_2">Spring Boot 2</a></li>
 </ul>
 </li>
+<li><a href="#_spring_boot_essentials">Spring Boot Essentials</a>
+<ul class="sectlevel2">
+<li><a href="#_actuator">Actuator</a></li>
+</ul>
+</li>
 <li><a href="#_resources">Resources</a>
 <ul class="sectlevel2">
 <li><a href="#_spring_documentation">Spring Documentation</a></li>
+<li><a href="#_spring_source_code">Spring Source Code</a></li>
 <li><a href="#_books">Books</a></li>
 <li><a href="#_websites">Websites</a></li>
 <li><a href="#_blog">Blog</a></li>
 <li><a href="#_twitter">Twitter</a></li>
 </ul>
 </li>
+<li><a href="#_join_our_community">Join our Community</a></li>
 <li><a href="#_contact_me">Contact Me</a></li>
 </ul>
 </div>
@@ -1832,6 +1839,31 @@ You can also watch a video of me talking about <a href="https://youtu.be/91n6y-T
 </div>
 </div>
 <div class="sect1">
+<h2 id="_spring_boot_essentials">Spring Boot Essentials</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_actuator">Actuator</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code># open up all of the endpoints for demo purposes
+# only expose certain endpoints ["health","info"]
+management.endpoints.web.expose=*
+management.endpoints.web.exclude=env
+management.endpoint.health.show-details=true</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_resources">Resources</h2>
 <div class="sectionbody">
 <div class="sect2">
@@ -1839,6 +1871,46 @@ You can also watch a video of me talking about <a href="https://youtu.be/91n6y-T
 <div class="paragraph">
 <p>There are a ton of great resources out there but I want to start with the documentation. The documentation for Spring Framework and Spring Boot has really improved over the years. I love some of the dedicated guides we got this time around with Actuator and the Gradle Plugin. </p>
 </div>
+<div class="sect3">
+<h4 id="_spring_framework_5_2">Spring Framework 5</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/">Spring Framework Reference Documentation</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#spring-core">Spring Core</a></p>
+</li>
+<li>
+<p><a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/testing.html#testing">Testing</a></p>
+</li>
+<li>
+<p><a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/data-access.html#spring-data-tier">Data Access</a></p>
+</li>
+<li>
+<p><a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#spring-web">Web Servlet</a></p>
+</li>
+<li>
+<p><a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html#spring-webflux">Web Reactive</a></p>
+</li>
+<li>
+<p><a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/integration.html#spring-integration">Integration</a></p>
+</li>
+<li>
+<p><a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/languages.html#languages">Languages</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="https://docs.spring.io/spring/docs/5.0.5.RELEASE/javadoc-api/">Spring Framework 5 API</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_spring_boot">Spring Boot</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1862,6 +1934,22 @@ You can also watch a video of me talking about <a href="https://youtu.be/91n6y-T
 </ul>
 </div>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_spring_source_code">Spring Source Code</h3>
+<div class="sect3">
+<h4 id="_spring_framework">Spring Framework</h4>
+<div class="paragraph">
+<p><a href="https://github.com/spring-projects/spring-framework" class="bare">https://github.com/spring-projects/spring-framework</a></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_spring_boot_3">Spring Boot</h4>
+<div class="paragraph">
+<p><a href="https://github.com/spring-projects/spring-boot" class="bare">https://github.com/spring-projects/spring-boot</a></p>
+</div>
+</div>
+</div>
 <div class="sect2">
 <h3 id="_books">Books</h3>
 
@@ -1877,6 +1965,22 @@ You can also watch a video of me talking about <a href="https://youtu.be/91n6y-T
 <div class="sect2">
 <h3 id="_twitter">Twitter</h3>
 
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_join_our_community">Join our Community</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We have started a brand new community for Spring Boot Developers. I want to invite all of you to a new private
+Facebook community that I recently started. This is a place for developers to talk about projects that they are
+working on, share new tips and tricks and even get help with problems that they are running into in their day to day
+development. I will be sharing some of my favorite books, courses and tutorials that will help you sharpen your
+Spring Development skills. This should be a fun place for all of us to hang out, so head on over and sign up.
+I can’t wait to chat with you!</p>
+</div>
+<div class="paragraph">
+<p><a href="https://www.facebook.com/groups/157072618416340/" class="bare">https://www.facebook.com/groups/157072618416340/</a></p>
 </div>
 </div>
 </div>
@@ -1905,7 +2009,7 @@ You can also watch a video of me talking about <a href="https://youtu.be/91n6y-T
 <div id="footer">
 <div id="footer-text">
 Version 0.1<br>
-Last updated 2018-04-14 14:05:02 EDT
+Last updated 2018-04-15 06:58:32 EDT
 </div>
 </div>
 </body>
