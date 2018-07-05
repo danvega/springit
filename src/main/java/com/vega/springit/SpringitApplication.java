@@ -16,14 +16,4 @@ public class SpringitApplication {
 		SpringApplication.run(SpringitApplication.class, args);
 	}
 
-	@Bean
-	CommandLineRunner runner() {
-		return args -> {
-			log.error("CommandLineRunner.run();");
-			log.warn( "CommandLineRunner.run();");
-			log.info( "CommandLineRunner.run();");
-			log.debug("CommandLineRunner.run();");
-			log.trace("CommandLineRunner.run();");
-		};
-	}
 }
