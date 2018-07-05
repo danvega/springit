@@ -29,3 +29,8 @@ Resources
 * https://help.github.com/articles/git-and-github-learning-resources/[Github Learning Resources]
 * https://guides.github.com/introduction/flow/[Understanding Github Workflows]
 * https://www.youtube.com/watch?v=EwWZbyjDs9c[Github Review - Exploring Workflows]
+
+=== Using Git & Github
+If you're brand new to Git & Github please don't let that throw you off of this course. I have left you with some resources to learn these tools but
+they are not a requirement for you to learn about what is new in Spring Boot 2. I also don't want you to get discouraged if you are not an IntelliJ user. There is nothing I showed in this section that you couldn't do from your IDE or editor of choice. I just happen to be using IntelliJ so I wanted
+to show off the tools available within the IDE. 
