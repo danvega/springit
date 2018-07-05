@@ -27,3 +27,5 @@ Resources
 
 * https://www.youtube.com/playlist?list=PL0lo9MOBetEHhfG9vJzVCTiDYcbhAiEqL[Github & Git Foundations]
 * https://help.github.com/articles/git-and-github-learning-resources/[Github Learning Resources]
+* https://guides.github.com/introduction/flow/[Understanding Github Workflows]
+* https://www.youtube.com/watch?v=EwWZbyjDs9c[Github Review - Exploring Workflows]
