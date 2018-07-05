@@ -11,9 +11,6 @@ repository for a lot of the course details.
 == Course Details
 include::_courseDetails.adoc[]
 
-== Github
-include::_github.adoc[]
-
 == Development Environment
 include::_developmentEnv.adoc[]
 
@@ -24,6 +21,9 @@ include::_whatsnew_springfw5.adoc[]
 
 === Spring Boot 2
 include::_whatsnew_springboot2.adoc[]
+
+== Github
+include::_github.adoc[]
 
 == Spring Boot Essentials
 
