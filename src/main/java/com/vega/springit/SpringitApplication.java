@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class SpringitApplication {
 
-	private static final Logger log = LoggerFactory.getLogger(SpringitApplication.class);
+	private static final Logger logger = LoggerFactory.getLogger(SpringitApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringitApplication.class, args);
