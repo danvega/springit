@@ -1,19 +1,24 @@
 package com.vega.springit.domain;
 
 
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
+@RequiredArgsConstructor
+@NamedQuery(name = "Link.findMyLinkByTitle",query = "select l from Link l where l.title = ?1")
 public class Link extends Auditable {
 
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
     private Long id;
-    private String title;
-    private String url;
+    @NonNull private String title;
+    @NonNull private String url;
 
     @OneToMany(mappedBy = "link")
     private List<Comment> comments = new ArrayList<>();
