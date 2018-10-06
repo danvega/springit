@@ -48,17 +48,17 @@ public class SpringitApplication {
 	}
 	*/
 
-	@Bean
-	CommandLineRunner runner(LinkRepository linkRepository, CommentRepository commentRepository) {
-		return args -> {
-			Link link = new Link("Getting Started with Spring Boot 2","https://therealdanvega.com/spring-boot-2");
-			linkRepository.save( link );
-
-			Comment comment = new Comment("This Spring Boot 2 Link is awesome",link);
-			commentRepository.save(comment);
-			link.addComment(comment);
-
-			System.out.println(link.getComments());
-		};
-	}
+//	@Bean
+//	CommandLineRunner runner(LinkRepository linkRepository, CommentRepository commentRepository) {
+//		return (String... args) -> {
+//			Link link = new Link("Getting Started with Spring Boot 2","https://therealdanvega.com/spring-boot-2");
+//			linkRepository.save( link );
+//
+//			Comment comment = new Comment("This Spring Boot 2 Link is awesome",link);
+//			commentRepository.save(comment);
+//			link.addComment(comment);
+//
+//			System.out.println(link.getComments());
+//		};
+//	}
 }
