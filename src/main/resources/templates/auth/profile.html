@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Springit - Spring Boot Reddit Clone</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="static/libs/bootstrap/css/bootstrap.min.css" />
+
+    <!-- Custom styles for this template -->
+    <link href="static/css/springit.css" rel="stylesheet">
+    <link href="static/css/profile.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Oswald|Roboto" rel="stylesheet">
+
+    <!-- Font Awesome (for icons) -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-spring fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fa fa-leaf" aria-hidden="true"></i>
+                SPRINGIT
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">
+                            <i class="fas fa-home" aria-hidden="true"></i> Home
+                        </a>
+                    </li>
+        
+                    <!-- if user is signed in -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="../link/submit.html">
+                            <i class="fa fa-link" aria-hidden="true"></i> Submit Link</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.html">
+                            <i class="fa fa-user" aria-hidden="true"></i> Account</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-sign-out-alt" aria-hidden="true"></i> Sign Out</a>
+                    </li>
+        
+                    <!-- if user is not signed in -->
+                    <li class="nav-item">
+                        <a class="nav-link" href=login.html>
+                            <i class="fa fa-sign-in-alt" aria-hidden="true"></i> Sign In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="register.html">
+                            <i class="fa fa-user-plus" aria-hidden="true"></i> Register</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container" align="center">
+            <h2 class="display-4">Spring Boot Reddit Clone</h2>
+            <p class="lead">This is a reddit clone built using <a href="#">Spring Boot 2</a>, <a href="#"></a>Spring Framework 5</a> & so many other great projects! If you would like to learn how to build this
+            application you can check out my course, <a href="#">Getting Started with Spring Boot 2</a>.</p>
+            <button type="button" class="btn btn-success"><i class="fab fa-github"></i>  Github Repo</button>
+            <button type="button" class="btn btn-success"><i class="fas fa-graduation-cap"></i> Spring Boot 2 Course</button>
+        </div>
+    </div>
+
+
+    <!-- profile -->
+    <div id="profile" class="container">
+    
+        <div class="row">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Overview</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Posts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Comments</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Preferences</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="row">
+
+            <div class="col-8">
+                <div class="row">
+                    <div class="card col-12" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">What's new in Spring Boot 2</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">submitted 7 days ago by therealdanvega</h6>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="card-link">8 Comments</a>
+                            <a href="#" class="card-link">Share</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="card col-12" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">What's new in Spring Boot 2</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">submitted 7 days ago by therealdanvega</h6>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="card-link">8 Comments</a>
+                            <a href="#" class="card-link">Share</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="card col-12" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">What's new in Spring Boot 2</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">submitted 7 days ago by therealdanvega</h6>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="card-link">8 Comments</a>
+                            <a href="#" class="card-link">Share</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="card col-12" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">What's new in Spring Boot 2</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">submitted 7 days ago by therealdanvega</h6>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="card-link">8 Comments</a>
+                            <a href="#" class="card-link">Share</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="card col-12" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">What's new in Spring Boot 2</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">submitted 7 days ago by therealdanvega</h6>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="card-link">8 Comments</a>
+                            <a href="#" class="card-link">Share</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Right Side -->
+            <div class="col-3 offset-1">
+                <div class="row">
+                    <div class="card col-12">
+                        <img class="card-img-top" src="static/images/profile_small.png" alt="Card image cap">
+                        <div class="card-body">
+                            <p class="card-text">
+                                <a href="/u/therealdanvega">/u/therealdanvega</a>
+                            </p>
+                            <a href="../link/submit.html"><button type="button" class="btn btn-primary btn-lg btn-block">New Post</button></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="card col-12">
+                        <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+                        <div class="card-body">
+                            <h5 class="card-title">Your Information</h5>
+                            <p class="card-text">
+                                Posts: 10<br/>
+                                Comments: 3<br/>
+                                User Since: November 23, 2017<br/>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="card col-12">
+                        <h5 class="card-title recentLinks">Recent Links Clicked</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><a href="#">What's new in Spring Boot 2</a></li>
+                            <li class="list-group-item"><a href="#">10 Features in Java 10</a></li>
+                            <li class="list-group-item"><a href="#">9 Features in Java 9</a></li>
+                            <li class="list-group-item"><a href="#">8 Features in Java 8</a></li>
+                            <li class="list-group-item"><a href="#">7 Reasons not to use Java 7</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- // row -->
+    
+    </div><!-- // profile -->
+
+</body>
+
+</html>

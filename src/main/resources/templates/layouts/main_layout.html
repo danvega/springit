@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title)">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title th:text="${title}">Springit - Spring Boot Reddit Clone</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" th:href="@{/libs/bootstrap/css/bootstrap.min.css}"/>
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" th:href="@{/css/springit.css}">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald|Roboto" >
+    <!-- Font Awesome (for icons) -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-spring fixed-top" th:fragment="navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fa fa-leaf" aria-hidden="true"></i>
+                SPRINGIT
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">
+                            <i class="fas fa-home" aria-hidden="true"></i> Home
+                        </a>
+                    </li>
+
+                    <!-- if user is signed in -->
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/link/submit}">
+                            <i class="fa fa-link" aria-hidden="true"></i> Submit Link</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../auth/profile.html">
+                            <i class="fa fa-user" aria-hidden="true"></i> Account</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-sign-out-alt" aria-hidden="true"></i> Sign Out</a>
+                    </li>
+
+                    <!-- if user is not signed in -->
+                    <li class="nav-item">
+                        <a class="nav-link" href=../auth/login.html>
+                            <i class="fa fa-sign-in-alt" aria-hidden="true"></i> Sign In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../auth/register.html">
+                            <i class="fa fa-user-plus" aria-hidden="true"></i> Register</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="jumbotron jumbotron-fluid" th:fragment="jumbotron">
+        <div class="container" align="center">
+            <h2 class="display-4">Spring Boot Reddit Clone</h2>
+            <p class="lead">This is a reddit clone built using <a href="#">Spring Boot 2</a>, <a href="#"></a>Spring Framework 5</a> & so many other great projects! If you would like to learn how to build this
+                application you can check out my course, <a href="#">Getting Started with Spring Boot 2</a>.</p>
+            <a href="http://www.github.com/cfaddict/springit" class="btn btn-success" target="_blank"><i class="fab fa-github"></i>  Github Repo</a>
+            <a href="https://therealdanvega.teachable.com/p/spring-boot-2" class="btn btn-success" target="_blank"><i class="fas fa-graduation-cap"></i> Spring Boot 2 Course</a>
+        </div>
+    </div>
+
+    <div class="container" th:fragment="content">
+        <p>This is your main content</p>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layouts/main_layout :: head(title = 'Springit - Spring Boot Reddit Clone')}">
+</head>
+<body>
+
+    <nav th:replace="~{layouts/main_layout :: nav}"></nav>
+    <div th:replace="~{layouts/main_layout :: jumbotron}"></div>
+
+    <div class="container">
+
+        <!-- links -->
+        <div class="row link" th:each="link : ${links}">
+            <div class="col-1">
+                <div><a href="#" class="upvote"><i class="fas fa-arrow-up"></i></a></div>
+                <div><span class="votecount">3</span></div>
+                <div><a href="#" class="downvote"><i class="fas fa-arrow-down"></i></a></div>
+            </div>
+            <div class="col-11">
+                <p class="title">
+                    <a class="title " th:href="@{'/link/' + ${link.id}}" th:text="${link.title}">
+                        Title Goes Here
+                    </a>
+                    <span class="domain">(<a th:href="${link.url}" th:text="${link.getDomainName()}" target="_blank">therealdanvega.com</a>)</span>
+                </p>
+                <p class="tagline ">submitted
+                    <!--<time title="Sat Mar 10 06:26:36 2018 UTC" datetime="2018-03-10T06:26:36+00:00" class="live-timestamp">2 hours ago</time> by-->
+                    <time th:title="${link.getCreationDate()}" th:datetime="${link.getCreationDate()}" class="live-timestamp" th:text="${link.getPrettyTime()}">1 hour(s)</time> by
+                    <a href="/" class="author">therealdanvega</a>
+                </p>
+                <p>
+                    <a th:href="@{'/link/' + ${link.id} + '#comments'}" class="comments" th:text="|${link.getComments().size()} comments|"><i class="fas fa-comments"></i> 0 comments</a>
+                    <a href="/" class="share"><i class="fas fa-share-square"></i> share</a>
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
