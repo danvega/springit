@@ -1,0 +1,119 @@
+
+
+.bg-spring {
+    background-color: #2E2A28!important;
+    border-top: 7px solid #6db33f;
+}
+
+nav .nav-item {
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    padding-right:10px;
+}
+
+body {
+    background: #ffffff;
+    font-family: 'Roboto', sans-serif;
+
+}
+
+/* Jumbotron */
+.jumbotron {
+    background: #17629D;
+    color:#ffffff;
+}
+.jumbotron {
+    padding: 80px;
+    padding-bottom: 40px;
+}
+.jumpbotron h2 {
+    font-family: 'Oswald', sans-serif;
+}
+.jumbotron a, .jumbotron a:visited {
+    color:#ffffff
+}
+.jumbotron p {
+    font-size: 15px;
+}
+
+
+/* Links */
+.position {
+    color:darkgray;
+
+}
+.votecount {
+    color:darkgray;
+    clear: both;
+    font-size: 18px;
+    vertical-align: middle;
+}
+
+.upvote {
+    vertical-align: top;
+}
+
+.downvote {
+    vertical-align: bottom;
+}
+
+a.upvote , a.downvote {
+    color:darkgrey;
+}
+
+.title {
+    margin:0px;
+}
+.tagline {
+    font-size:14px;
+}
+
+
+a.comments {
+    color: #000000
+}
+a.share {
+    padding-left: 10px;
+    color: #000000
+}
+
+
+.domain  {
+    color:darkgrey;
+    font-size:13px;
+    padding-left:10px;
+}
+.domain a, .domain a:hover, .domain a:visited {
+    color:darkgrey;
+}
+
+/* comments */
+.comments .title {
+    border-bottom: 1px dotted #000000;
+    margin-bottom: 20px;
+}
+.addcomment {
+    margin-bottom:20px;
+}
+.comment {
+    margin-top:20px;
+}
+.comment .body {
+    margin: 0 0 5px 0;
+    padding:0px;
+}
+.comment .permalink {
+    
+}
+.comment .like {
+    padding-left:10px;
+}
+
+
+/* Registration */
+@media(min-width: 768px) {
+    .field-label-responsive {
+        padding-top: .5rem;
+        text-align: right;
+    }
+}

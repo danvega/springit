@@ -1,0 +1,26 @@
+body {
+    background: #EBF0F4;
+}
+
+#profile a.nav-link {
+    text-transform: uppercase;
+}
+#profile a.nav-link.active {
+    border-bottom: 1px solid blue;
+}
+
+#profile > .row:first-child {
+    margin-bottom:20px;
+}
+
+.card {
+    margin-bottom: 5px;
+}
+
+.card-img-top {
+    padding-top:10px;
+}
+
+.recentLinks {
+    padding-top:10px;
+}
