@@ -38,7 +38,7 @@ public class LinkController {
         if( link.isPresent() ) {
             model.addAttribute("link",link.get());
             model.addAttribute("success", model.containsAttribute("success"));
-            return "link/view";
+            return "link/view";  
         } else {
             return "redirect:/";
         }
