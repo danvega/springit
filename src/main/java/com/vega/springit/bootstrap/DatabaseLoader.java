@@ -1,10 +1,15 @@
-package com.vega.springit;
+package com.vega.springit.bootstrap;
 
 import com.vega.springit.domain.Comment;
 import com.vega.springit.domain.Link;
+import com.vega.springit.domain.Role;
+import com.vega.springit.domain.User;
 import com.vega.springit.repository.CommentRepository;
 import com.vega.springit.repository.LinkRepository;
+import com.vega.springit.repository.RoleRepository;
+import com.vega.springit.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -15,14 +20,22 @@ public class DatabaseLoader implements CommandLineRunner {
 
     private LinkRepository linkRepository;
     private CommentRepository commentRepository;
+    private UserRepository userRepository;
+    private RoleRepository roleRepository;
 
-    public DatabaseLoader(LinkRepository linkRepository, CommentRepository commentRepository) {
+    public DatabaseLoader(LinkRepository linkRepository, CommentRepository commentRepository, UserRepository userRepository, RoleRepository roleRepository) {
         this.linkRepository = linkRepository;
         this.commentRepository = commentRepository;
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
     }
 
     @Override
     public void run(String... args) {
+
+        // add users and roles
+        addUsersAndRoles();
+
         Map<String,String> links = new HashMap<>();
         links.put("Securing Spring Boot APIs and SPAs with OAuth 2.0","https://auth0.com/blog/securing-spring-boot-apis-and-spas-with-oauth2/?utm_source=reddit&utm_medium=sc&utm_campaign=springboot_spa_securing");
         links.put("Easy way to detect Device in Java Web Application using Spring Mobile - Source code to download from GitHub","https://www.opencodez.com/java/device-detection-using-spring-mobile.htm");
@@ -43,5 +56,22 @@ public class DatabaseLoader implements CommandLineRunner {
 
         long linkCount = linkRepository.count();
         System.out.println("Number of links in the database: " + linkCount );
+    }
+
+    private void addUsersAndRoles() {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String secret = "{bcrypt}" + encoder.encode("password");
+
+        Role userRole = new Role("ROLE_USER");
+        roleRepository.save(userRole);
+
+        User user = new User("danvega@gmail.com",secret,true, userRole);
+        userRepository.save(user);
+
+        Role adminRole = new Role("ROLE_ADMIN");
+        roleRepository.save(adminRole);
+
+        User admin = new User("admindanny@gmail.com",secret,true, adminRole);
+        userRepository.save(admin);
     }
 }
