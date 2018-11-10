@@ -7,12 +7,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
 
 @SpringBootApplication
 @EnableJpaAuditing
 public class SpringitApplication {
 
-	private static final Logger log = LoggerFactory.getLogger(SpringitApplication.class);
+	private static final Logger logger = LoggerFactory.getLogger(SpringitApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringitApplication.class, args);
@@ -22,4 +23,13 @@ public class SpringitApplication {
 	PrettyTime prettyTime() {
 		return new PrettyTime();
 	}
+
+	// TODO * Configuring this bean should not be needed once Spring Boot's Thymeleaf starter includes configuration
+	// TODO   for thymeleaf-extras-springsecurity5 (instead of thymeleaf-extras-springsecurity4)
+	@Bean
+	public SpringSecurityDialect securityDialect() {
+		logger.info("Adding Spring Security Thymeleaf Dialect");
+		return new SpringSecurityDialect();
+	}
+
 }

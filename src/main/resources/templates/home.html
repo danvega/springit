@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{layouts/main_layout :: head(title='WELCOME HOME!')}">
 </head>
 <body>
     <nav th:replace="~{layouts/main_layout :: nav}"></nav>
     <div th:replace="~{layouts/main_layout :: jumbotron}"></div>
     <div th:replace="~{layouts/main_layout :: content}">
-        <p>This is my /home content</p>
+        <p sec:authorize="hasRole('ROLE_USER')">This is my /home content</p>
     </div>
 </body>
 </html>
