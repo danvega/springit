@@ -7,9 +7,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
 @NoArgsConstructor
@@ -33,16 +32,30 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private boolean enabled;
 
-    @NonNull
-    @OneToOne
-    @JoinColumn(name = "role_id")
-    private Role role;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id",referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName = "id")
+    )
+    private Set<Role> roles = new HashSet<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(role.getName()));
-        return authorities;
+//        List<GrantedAuthority> authorities = new ArrayList<>();
+//        for(Role role : roles) {
+//            authorities.add(new SimpleGrantedAuthority(role.getName()));
+//        }
+//        return authorities;
+        return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+    }
+
+    public void addRole(Role role) {
+        roles.add(role);
+    }
+
+    public void addRoles(Set<Role> roles) {
+        roles.forEach(this::addRole);
     }
 
     @Override
