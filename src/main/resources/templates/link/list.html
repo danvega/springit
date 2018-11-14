@@ -11,9 +11,9 @@
         <!-- links -->
         <div class="row link" th:each="link : ${links}">
             <div class="col-1">
-                <div><a href="#" class="upvote"><i class="fas fa-arrow-up"></i></a></div>
-                <div><span class="votecount">3</span></div>
-                <div><a href="#" class="downvote"><i class="fas fa-arrow-down"></i></a></div>
+                <div><a href="#" class="upvote" th:data-id="${link.id}"><i class="fas fa-arrow-up"></i></a></div>
+                <div><span th:id="|votecount-${link.id}|" class="votecount" th:text="${link.getVotesSum()}">3</span></div>
+                <div><a href="#" class="downvote" th:data-id="${link.id}"><i class="fas fa-arrow-down"></i></a></div>
             </div>
             <div class="col-11">
                 <p class="title">
@@ -36,5 +36,64 @@
 
     </div>
 
+    <script>
+
+        const allvotes = document.querySelectorAll(".upvote, .downvote");
+        console.log(allvotes);
+        
+        for(let i=0; i<allvotes.length; i++) {
+            let className = allvotes[i].className;
+            let votecount = allvotes[i].closest("votecount");
+            console.log(votecount);
+            allvotes[i].addEventListener('click', function (event) {
+                const direction = className === 'upvote' ? 1 : -1;
+                const linkID = this.getAttribute("data-id");
+                console.log(direction,linkID);
+            });
+        }
+
+        /*
+        const upvotes = document.querySelectorAll(".upvote");
+
+        for (let i = 0; i < upvotes.length; i++) {
+            upvotes[i].addEventListener('click', function(event) {
+                const direction = 1;
+                const linkID = this.getAttribute("data-id");
+                const url = `//localhost:8080/vote/link/${linkID}/direction/${direction}`;
+
+                fetch(url)
+                    .then(function(response){
+                        if( response.ok ){
+                            window.location.reload();
+                        }
+                    })
+                    .catch(function(err){
+                        console.error(err);
+                    });
+            });
+        }
+
+        const downvotes = document.querySelectorAll(".downvote");
+
+        for (let i = 0; i < upvotes.length; i++) {
+            downvotes[i].addEventListener('click', function(event) {
+                const direction = -1;
+                const linkID = this.getAttribute("data-id");
+                const url = `//localhost:8080/vote/link/${linkID}/direction/${direction}`;
+
+                fetch(url)
+                    .then(function(response){
+                        if( response.ok ){
+                            window.location.reload();
+                        }
+                    })
+                    .catch(function(err){
+                        console.error(err);
+                    });
+            });
+        }
+        */
+
+    </script>
 </body>
 </html>

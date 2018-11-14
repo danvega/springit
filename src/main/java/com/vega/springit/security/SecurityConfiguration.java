@@ -30,6 +30,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/link/submit").hasRole("USER")
                 .antMatchers("/link/**").permitAll()
                 .antMatchers("/").permitAll()
+                .antMatchers("/vote/**").permitAll()
+                .antMatchers("/h2-console/**").permitAll()
                 .and()
             .formLogin()
                 .loginPage("/login").permitAll()
@@ -37,7 +39,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
             .logout()
                 .and()
-            .rememberMe();
+            .rememberMe()
+            .and()
+            .csrf().disable()
+            .headers().frameOptions().disable();
     }
 
     @Override
