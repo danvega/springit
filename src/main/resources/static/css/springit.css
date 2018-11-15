@@ -11,6 +11,12 @@ nav .nav-item {
     padding-right:10px;
 }
 
+button.nav-link {
+    background: #2D2A27;
+    border:none;
+    cursor: pointer;
+}
+
 body {
     background: #ffffff;
     font-family: 'Roboto', sans-serif;

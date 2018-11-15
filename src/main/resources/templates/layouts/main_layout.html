@@ -46,8 +46,9 @@
                             <i class="fa fa-user" aria-hidden="true"></i> Account</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="fa fa-sign-out-alt" aria-hidden="true"></i> Sign Out</a>
+                        <form method="POST" th:action="@{/logout}">
+                            <button class="nav-link"><i class="fa fa-sign-out-alt" aria-hidden="true"></i> Sign Out</button>
+                        </form>
                     </li>
 
                     <!-- if user is not signed in -->
