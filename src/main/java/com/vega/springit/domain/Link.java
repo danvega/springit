@@ -46,20 +46,14 @@ public class Link extends Auditable {
     @OneToMany(mappedBy = "link")
     private List<Vote> votes = new ArrayList<>();
 
+    private int voteCount = 0;
+
     public void addComment(Comment comment) {
         comments.add(comment);
     }
 
     public void addVote(Vote vote) {
         votes.add(vote);
-    }
-
-    public int getVotesSum() {
-        int sum = 0;
-        for(Vote vote: votes) {
-            sum += vote.getDirection();
-        }
-        return sum;
     }
 
     public String getDomainName() throws URISyntaxException {

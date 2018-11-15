@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{layouts/main_layout :: head(title='Springit - Spring Boot Reddit Clone')}">
 </head>
 <body>
@@ -12,8 +12,8 @@
         <div class="row link" th:each="link : ${links}">
             <div class="col-1">
                 <div><a href="#" class="upvote" th:data-id="${link.id}"><i class="fas fa-arrow-up"></i></a></div>
-                <div><span th:id="|votecount-${link.id}|" class="votecount" th:text="${link.getVotesSum()}">3</span></div>
-                <div><a href="#" class="downvote" th:data-id="${link.id}"><i class="fas fa-arrow-down"></i></a></div>
+                <div><span th:id="|votecount-${link.id}|" class="votecount" th:text="${link.getVoteCount()}">0</span></div>
+                <div><a href="#" class="downvote" th:data-id="${link.id}" th:disabled="true"><i class="fas fa-arrow-down"></i></a></div>
             </div>
             <div class="col-11">
                 <p class="title">
@@ -23,7 +23,6 @@
                     <span class="domain">(<a th:href="${link.url}" th:text="${link.getDomainName()}">therealdanvega.com</a>)</span>
                 </p>
                 <p class="tagline ">submitted
-                    <!--<time title="Sat Mar 10 06:26:36 2018 UTC" datetime="2018-03-10T06:26:36+00:00" class="live-timestamp">2 hours ago</time> by-->
                     <time th:title="${link.getCreationDate()}" th:datetime="${link.getCreationDate()}" class="live-timestamp" th:text="${link.getPrettyTime()}">1 hour(s)</time> by
                     <a href="/" class="author">therealdanvega</a>
                 </p>
@@ -36,64 +35,21 @@
 
     </div>
 
-    <script>
-
+    <script sec:authentication="isAuthenticated()">
         const allvotes = document.querySelectorAll(".upvote, .downvote");
-        console.log(allvotes);
-        
         for(let i=0; i<allvotes.length; i++) {
             let className = allvotes[i].className;
-            let votecount = allvotes[i].closest("votecount");
-            console.log(votecount);
             allvotes[i].addEventListener('click', function (event) {
                 const direction = className === 'upvote' ? 1 : -1;
                 const linkID = this.getAttribute("data-id");
-                console.log(direction,linkID);
+                const voteSum = document.getElementById('votecount-' + linkID);
+                const voteSumValue = voteSum.innerHTML;
+                fetch(`http://localhost:8080/vote/link/${linkID}/direction/${direction}/votecount/${voteSumValue}`)
+                    .then(response => response.json())
+                    .then(data => voteSum.innerHTML = data)
+                    .catch(err => console.error(err));
             });
         }
-
-        /*
-        const upvotes = document.querySelectorAll(".upvote");
-
-        for (let i = 0; i < upvotes.length; i++) {
-            upvotes[i].addEventListener('click', function(event) {
-                const direction = 1;
-                const linkID = this.getAttribute("data-id");
-                const url = `//localhost:8080/vote/link/${linkID}/direction/${direction}`;
-
-                fetch(url)
-                    .then(function(response){
-                        if( response.ok ){
-                            window.location.reload();
-                        }
-                    })
-                    .catch(function(err){
-                        console.error(err);
-                    });
-            });
-        }
-
-        const downvotes = document.querySelectorAll(".downvote");
-
-        for (let i = 0; i < upvotes.length; i++) {
-            downvotes[i].addEventListener('click', function(event) {
-                const direction = -1;
-                const linkID = this.getAttribute("data-id");
-                const url = `//localhost:8080/vote/link/${linkID}/direction/${direction}`;
-
-                fetch(url)
-                    .then(function(response){
-                        if( response.ok ){
-                            window.location.reload();
-                        }
-                    })
-                    .catch(function(err){
-                        console.error(err);
-                    });
-            });
-        }
-        */
-
     </script>
 </body>
 </html>

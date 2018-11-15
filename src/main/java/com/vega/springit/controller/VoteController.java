@@ -21,13 +21,20 @@ public class VoteController {
         this.linkRepository = linkRepository;
     }
 
-    @GetMapping("/vote/link/{linkID}/direction/{direction}")
-    public String vote(@PathVariable Long linkID, @PathVariable short direction) {
-        Optional<Link> link = linkRepository.findById(linkID);
-        if( link.isPresent() ) {
-            Vote vote = new Vote(direction,link.get());
+    @GetMapping("/vote/link/{linkID}/direction/{direction}/votecount/{voteCount}")
+    public int vote(@PathVariable Long linkID, @PathVariable short direction, @PathVariable int voteCount) {
+        Optional<Link> optionalLink = linkRepository.findById(linkID);
+        if( optionalLink.isPresent() ) {
+            Link link = optionalLink.get();
+            Vote vote = new Vote(direction,link);
             voteRepository.save(vote);
+
+            int updatedVoteCount = voteCount + direction;
+            link.setVoteCount(updatedVoteCount);
+            linkRepository.save(link);
+            return updatedVoteCount;
         }
-        return "ok";
+
+        return voteCount;
     }
 }
