@@ -12,9 +12,9 @@
         <!-- links -->
         <div class="row link" th:each="link : ${links}">
             <div class="col-1">
-                <div><a href="#" class="upvote"><i class="fas fa-arrow-up"></i></a></div>
-                <div><span class="votecount">3</span></div>
-                <div><a href="#" class="downvote"><i class="fas fa-arrow-down"></i></a></div>
+                <div><a href="#" class="upvote" th:data-id="${link.id}"><i class="fas fa-arrow-up"></i></a></div>
+                <div><span th:id="|votecount-${link.id}|" class="votecount" th:text="${link.getVoteCount()}">0</span></div>
+                <div><a href="#" class="downvote" th:data-id="${link.id}" th:disabled="true"><i class="fas fa-arrow-down"></i></a></div>
             </div>
             <div class="col-11">
                 <p class="title">
@@ -36,6 +36,24 @@
         </div>
 
     </div>
+
+    <script>
+        const allvotes = document.querySelectorAll(".upvote, .downvote");
+
+        for(let i=0; i<allvotes.length; i++) {
+            let className = allvotes[i].className;
+            allvotes[i].addEventListener('click',function (event) {
+                const direction = className === 'upvote' ? 1 : -1;
+                const linkID = this.getAttribute("data-id");
+                const voteSum = document.getElementById('votecount-' + linkID);
+                const voteSumValue = voteSum.innerHTML;
+                fetch(`http://localhost:8080/vote/link/${linkID}/direction/${direction}/votecount/${voteSumValue}`)
+                    .then(response => response.json())
+                    .then(data => voteSum.innerHTML = data)
+                    .catch(err => console.error(err))
+            });
+        }
+    </script>
 
 </body>
 </html>
