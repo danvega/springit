@@ -50,10 +50,13 @@
             <div class="row addcomment">
                 <div class="col-1">&nbsp;</div>
                 <div class="col-11">
-                    <div class="form-group">
-                        <textarea class="form-control" id="comment" rows="3"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Add Comment</button>
+                    <form id="frmAddLink" method="POST" th:action="@{/link/comments}" th:object="${comment}">
+                        <input type="hidden" th:field="*{link}"/>
+                        <div class="form-group">
+                            <textarea class="form-control" id="comment" rows="3" th:field="*{body}"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add Comment</button>
+                    </form>
                 </div>
             </div>
             <!-- single comment -->
@@ -71,6 +74,8 @@
         </div>
 
     </div>
+
+    <br/><br/>
 
 </body>
 </html>
