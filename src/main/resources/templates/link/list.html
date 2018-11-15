@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{layouts/main_layout :: head(title = 'Springit - Spring Boot Reddit Clone')}">
 </head>
 <body>
@@ -37,7 +37,7 @@
 
     </div>
 
-    <script>
+    <script sec:authorize="isFullyAuthenticated()">
         const allvotes = document.querySelectorAll(".upvote, .downvote");
 
         for(let i=0; i<allvotes.length; i++) {
