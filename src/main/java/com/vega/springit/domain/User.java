@@ -6,6 +6,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -23,8 +24,8 @@ public class User implements UserDetails {
     @Size(min = 8, max = 20)
     @Column(nullable = false, unique = true)
     private String email;
-    @NonNull
 
+    @NonNull
     @Column(length = 100)
     private String password;
 
@@ -40,13 +41,32 @@ public class User implements UserDetails {
     )
     private Set<Role> roles = new HashSet<>();
 
+    // NEW STUFF
+
+    @NonNull
+    @NotNull(message = "You must enter a first name.")
+    private String firstName;
+
+    @NonNull
+    @NotNull(message = "You must enter a lastName name.")
+    private String lastName;
+
+    @Transient
+    @Setter(AccessLevel.NONE)
+    private String fullName;
+
+    @NonNull
+    @NotNull
+    private String alias;
+
+    public String getFullName(){
+        return firstName + " " + lastName;
+    }
+
+    // NEW STUFF
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-//        List<GrantedAuthority> authorities = new ArrayList<>();
-//        for(Role role : roles) {
-//            authorities.add(new SimpleGrantedAuthority(role.getName()));
-//        }
-//        return authorities;
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
     }
 

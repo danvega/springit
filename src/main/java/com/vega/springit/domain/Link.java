@@ -6,10 +6,7 @@ import org.hibernate.annotations.Formula;
 import org.hibernate.validator.constraints.URL;
 import org.ocpsoft.prettytime.PrettyTime;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -54,6 +51,9 @@ public class Link extends Auditable {
     public void addVote(Vote vote) {
         votes.add(vote);
     }
+
+    @ManyToOne
+    private User user;
 
     public String getDomainName() throws URISyntaxException {
         URI uri = new URI(this.url);

@@ -2,11 +2,13 @@ package com.vega.springit.controller;
 
 import com.vega.springit.domain.Comment;
 import com.vega.springit.domain.Link;
+import com.vega.springit.domain.User;
 import com.vega.springit.repository.CommentRepository;
 import com.vega.springit.repository.LinkRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -67,6 +70,7 @@ public class LinkController {
             return "link/submit";
         } else {
             // save our link
+            link.setUser(getCurrentUser());
             linkRepository.save(link);
             logger.info("New Link was saved successfully.");
             redirectAttributes
@@ -82,9 +86,14 @@ public class LinkController {
             logger.info("Something went wrong.");
         } else {
             logger.info("New Comment Saved!");
+            comment.setUser(getCurrentUser());
             commentRepository.save(comment);
         }
         return "redirect:/link/" + comment.getLink().getId();
+    }
+
+    private User getCurrentUser() {
+        return ((User)SecurityContextHolder.getContext().getAuthentication().getPrincipal());
     }
 
 }
