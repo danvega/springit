@@ -1,20 +1,25 @@
 package com.vega.springit.domain;
 
+import com.vega.springit.domain.validator.PasswordsMatch;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
 @NoArgsConstructor
 @Getter @Setter
 @RequiredArgsConstructor
+@PasswordsMatch
 public class User implements UserDetails {
 
     @Id @GeneratedValue
@@ -22,10 +27,12 @@ public class User implements UserDetails {
 
     @NonNull
     @Size(min = 8, max = 20)
+    @Email(message = "Please enter a valid Email Address.")
     @Column(nullable = false, unique = true)
     private String email;
 
     @NonNull
+    @NotEmpty(message = "Please enter Password.")
     @Column(length = 100)
     private String password;
 
@@ -41,29 +48,28 @@ public class User implements UserDetails {
     )
     private Set<Role> roles = new HashSet<>();
 
-    // NEW STUFF
-
     @NonNull
-    @NotNull(message = "You must enter a first name.")
+    @NotEmpty(message = "You must enter First Name.")
     private String firstName;
 
     @NonNull
-    @NotNull(message = "You must enter a lastName name.")
+    @NotEmpty(message = "You must enter Last Name.")
     private String lastName;
 
     @Transient
-    @Setter(AccessLevel.NONE)
-    private String fullName;
+    @NotEmpty(message = "Please enter Password Confirmation.")
+    private String confirmPassword;
 
     @NonNull
-    @NotNull
+    @NotEmpty(message = "Please enter alias.")
+    @Column(nullable = false, unique = true)
     private String alias;
+
+    private String activationCode;
 
     public String getFullName(){
         return firstName + " " + lastName;
     }
-
-    // NEW STUFF
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
