@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -69,5 +70,9 @@ public class UserService {
 
     public void sendWelcomeEmail(User user) {
         mailService.sendWelcomeEmail(user);
+    }
+
+    public Optional<User> findByEmailAndActivationCode(String email, String activationCode) {
+        return userRepository.findByEmailAndActivationCode(email,activationCode);
     }
 }
