@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Your Message Subject or Title</title>
+</head>
+<body>
+    <h1>Springit Welcome</h1>
+    <p th:text="|Dear ${user.getFullName()}|">Dear Username</p>
+    <p>Welcome to your new favorite site.</p>
+</body>
+</html>
